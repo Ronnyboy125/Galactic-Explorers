@@ -1,0 +1,60 @@
+
+
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  /* background-image: url('/assets/space-background.jpg'); */
+  background-size: cover;
+  color: white;
+  text-align: center;
+}
+
+.game-title {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.home-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.start-button, .continue-button {
+  background-color: #3498db;
+  color: white;
+  padding: 10px 20px;
+  margin: 10px;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 1.5rem;
+  transition: background-color 0.3s;
+}
+
+.start-button:hover, .continue-button:hover {
+  background-color: #2980b9;
+}
+
+.instructions {
+  margin-top: 30px;
+  font-size: 1.2rem;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+/*  */
+
+.planet {
+  margin: 20px;
+}
+
+.unlocked a {
+  color: #00ff00; /* unlocked planets */
+  text-decoration: none;
+}
+
+.locked span {
+  color: #888888; /* locked planets */
+}
