@@ -2,50 +2,11 @@
 
 We absolutely dont need to be boxed in with this structure but it is a good starting point. We can always add or remove components as we see fit or change it entirely if someone has a different direction they think it should go in.
 
-### 1. **structure**
 
 
-@startuml
-
-package cbw {
-  folder public {
-    file index.html
-    folder assets {
-      file space-background.jpg
-    }
-  }
-  
-  folder src {
-    folder components {
-      file Home.js
-      file SolarSystem.js
-      file Planet.js // displays info/mini-game
-      file MiniGame.js // tasks/questions/puzzles
-      file ShipUpgrade.js // shows upgraded ship status, similar to a scoreboard
-      file PlanetDetails.js // optional, may display details for each planet
-    }
-    
-    folder services {
-      file api.js // handles API requests
-    }
-    
-    file App.js // main app file
-    file index.js // React entry point
-    file App.css // styling for the app
-  }
-  
-  folder server {
-    file server.js // handles server-side logic
-    file routes.js // API routes
-  }
-  
-  file package.json // npm dependencies and scripts
-}
-
-@enduml
 
 
-### 2. **How the Game Works**
+### 1. **How the Game Might Work**
 
 #### **Start Screen**
 - `Home.js`
@@ -90,7 +51,7 @@ package cbw {
   - Upgrades are earned by successfully completing mini-games and stored in the player's progress.
   - Ship upgrades can unlock new planets or allow for different types of gameplay.
 
-### 3. **Navigation and Progress Tracking**
+### 2. **Navigation and Progress Tracking**
 - **Navigation**: With the react router we could handle navigation between different pages/screens. For example:
   - Home > Solar System > Planets > Games > Ship Upgrades.
 - **State Management**:
@@ -99,7 +60,7 @@ package cbw {
 
 ---
 
-### 4. **Game Logic**
+### 3. **Game Logic**
 
 App.js:
 - Will manages routing between screens using React Router.
@@ -123,7 +84,7 @@ ShipUpgrade.js:
 
 ---
 
-### 5. **Back-End**
+### 4. **Back-End**
 
 If we decide to implement a back end to persist player progress, the cloud server will handle requests to save and load player data.
 
@@ -146,7 +107,7 @@ If we decide to implement a back end to persist player progress, the cloud serve
 
 ---
 
-### 6. **Visual Representation**
+### 5. **Visual Representation**
 
 The game's UI should only really consist of the following at its core:
 
