@@ -11,9 +11,25 @@ function Planet({ progress, setProgress }) {
 
   const handleMiniGameComplete = () => {
     setMiniGameCompleted(true);
+    let nextPlanet = "";
+    //check if the player has the appropriate upgrade to unlock the next planet
+    switch (name){
+      case "Earth":
+        nextPlanet = "Moon";
+        break;
+      case "Moon":
+        nextPlanet = "Mars";
+        break;
+      case "Mars":
+        nextPlanet = "Venus";
+        break;
+      default:
+        break;
+    }
+
     const newProgress = {
       ...progress,
-      unlockedPlanets: [...progress.unlockedPlanets, "Moon"],
+      unlockedPlanets: [...progress.unlockedPlanets, nextPlanet],
       upgrades: [...progress.upgrades, `${name} Upgrade`],
     };
     setProgress(newProgress);
