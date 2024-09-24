@@ -23,13 +23,13 @@ const initialMaze = [
 ];
 
 const planetResources = {
-  mercury: [
-    { type: 'Iron Ore', fact: 'Mercury has large deposits of iron, which makes it denser than many other planets.' },
-    { type: 'Sulfur', fact: 'Mercury\'s surface contains sulfur, likely a result of volcanic activity.' },
+  earth: [
+    { type: 'Earth Material', fact: 'Materials for spaceship' },//need research
+    { type: 'Earth Material 2', fact: 'Materials for spaceship.' },//need research
   ],
-  mars: [
-    { type: 'Carbon Crystal', fact: 'Mars contains carbon in the form of dry ice at its poles.' },
-    { type: 'Martian Rock', fact: 'Mars has iron-rich rocks that give the planet its distinct red color.' },
+  moon: [
+    { type: 'Moon Material', fact: 'Moon materials.' },//need research
+    { type: 'Moon Material 2', fact: 'Moon materials.' },//need research
   ],
 };
 
@@ -43,7 +43,7 @@ const getRandomPosition = (maze) => {
   return [x, y];
 };
 
-const MazeGame = ({ planet = 'mercury', onComplete }) => {
+const MazeGame = ({ planet = 'earth', onComplete }) => {
   const [maze, setMaze] = useState(initialMaze);
   const [playerPosition, setPlayerPosition] = useState([0, 0]);
   const [fact, setFact] = useState(null);

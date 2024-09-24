@@ -11,7 +11,7 @@ function Planet({ progress, setProgress }) {
     setMiniGameCompleted(true);
     const newProgress = {
       ...progress,
-      unlockedPlanets: [...progress.unlockedPlanets, "Venus"],
+      unlockedPlanets: [...progress.unlockedPlanets, "Moon"],
       upgrades: [...progress.upgrades, `${name} Upgrade`],
     };
     setProgress(newProgress);

@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 
 function SolarSystem({ progress }) {
   const planets = [
-    { name: 'Mercury', unlocked: true }, //  unlocked planet for testing...
-    { name: 'Venus', unlocked: progress.unlockedPlanets.includes('Venus') },
-    { name: 'Earth', unlocked: progress.unlockedPlanets.includes('Earth') },
+    { name: 'Earth', unlocked: true }, //  unlocked planet for testing...
+    { name: 'Moon', unlocked: progress.unlockedPlanets.includes('Moon') },
     { name: 'Mars', unlocked: progress.unlockedPlanets.includes('Mars') },
+    { name: 'Venus', unlocked: progress.unlockedPlanets.includes('Venus') },
   ];
 
   //for rendering a solar system interface like 
