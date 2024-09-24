@@ -167,3 +167,15 @@
   color: white;
   text-align: center;
 }
+
+.Mars {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 150vh;
+  background-image: url('/assets/mars-background.png');
+  background-size: cover;
+  color: white;
+  text-align: center;
+}
