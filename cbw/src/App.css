@@ -143,3 +143,27 @@
 .leave-button:hover {
   background-color: #218838;
 }
+
+.Earth {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 150vh;
+  background-image: url('/assets/earth-background.png');
+  background-size: cover;
+  color: white;
+  text-align: center;
+}
+
+.Moon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 150vh;
+  background-image: url('/assets/moon-background.png');
+  background-size: cover;
+  color: white;
+  text-align: center;
+}

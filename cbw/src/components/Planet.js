@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import MiniGame from "./MiniGame";
+import "../App.css";
 
 function Planet({ progress, setProgress }) {
   const { name } = useParams();
   const [miniGameCompleted, setMiniGameCompleted] = useState(false);
   const navigate = useNavigate();
+  const conditionalBackground = name;
 
   const handleMiniGameComplete = () => {
     setMiniGameCompleted(true);
@@ -28,7 +30,7 @@ function Planet({ progress, setProgress }) {
   }, [miniGameCompleted, navigate]);
 
   return (
-    <div className="planet-page">
+    <div className={conditionalBackground}>
       <h1>Welcome to {name}</h1>
       {!miniGameCompleted ? (
         <MiniGame
