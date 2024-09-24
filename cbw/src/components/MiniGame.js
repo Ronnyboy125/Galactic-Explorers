@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../App.css';
+import InventoryCounts from '../services/inventoryCount';
 
 // prototype of the maze mini game, need art assets, needs the inventory to be stacked (ie iron ore x 3)
 // better styling, and styling specific to the planet
@@ -120,9 +121,10 @@ const MazeGame = ({ planet = 'mercury', onComplete }) => {
         <div className="inventory">
           <h3>Inventory:</h3>
           <ul>
-            {inventory.map((item) => (
+            {/* {Object.entries(inventory).map((item) => (
               <li key={item}>{item}</li>
-            ))}
+            ))} */}
+            <InventoryCounts inventory={inventory}/>
           </ul>
         </div>
         <div className="maze-grid">
