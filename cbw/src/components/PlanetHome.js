@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import '../App.css';
+import { useParams } from 'react-router-dom';
 
 const GROUND_SIZE= 16;
 
@@ -22,6 +23,7 @@ const PlanetHome = ({setIsCovered}) =>{
 const [borders,setBorders] = useState(border)
 const [playerPosition, setPlayerPosition] = useState([5,7]);
 const [miniGame, setMiniGame] = useState([2,13])
+const { name } = useParams();
 
 const handleKeyDown = (e) => {
     const [x, y] = playerPosition;
@@ -61,13 +63,13 @@ useEffect(() => {
 
 return (
     <div className='game-Layout'>
-        <div className='maze-container'>
+        <div className= {name+'-container'}>
             <div className="maze-grid">
                 {borders.map((row, rowIndex) => (
                     <div className="row" key={rowIndex}>
                     {row.map((cell, colIndex) => (
                         <div
-                        className={`planetCell ${cell === 1 ? 'earthWall' : 'earthPath'} ${
+                        className={`planetCell ${cell === 1 ? name+'Wall' : 'planetPath'} ${
                             playerPosition[0] === rowIndex && playerPosition[1] === colIndex ? 'player' : ''
                         }`}
                         key={colIndex}

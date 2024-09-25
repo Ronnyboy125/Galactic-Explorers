@@ -142,6 +142,36 @@
   font-family: 'Space Mono', monospace; /* Space-themed font */
 }
 
+.Earth-container {
+  display: flex;
+  flex-direction: column;
+  background-image: url('/assets/earth-landing.png');
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  font-family: 'Space Mono', monospace; /* Space-themed font */
+}
+
+.Moon-container {
+  display: flex;
+  flex-direction: column;
+  background-image: url('/assets/moon-landing.png');
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  font-family: 'Space Mono', monospace; /* Space-themed font */
+}
+
+.Mars-container {
+  display: flex;
+  flex-direction: column;
+  background-image: url('/assets/mars-landing.png');
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  font-family: 'Space Mono', monospace; /* Space-themed font */
+}
+
 .row {
   display: flex;
 }
@@ -171,8 +201,13 @@
   background-color: #1a1a1a;
 }
 
-.earthPath {
+.EarthPath {
   background-color: green
+}
+
+.MoonPath{
+  /* background-color: lightblue; */
+  
 }
 
 .wall {
@@ -180,8 +215,12 @@
   animation: pulse 2s infinite;
 }
 
-.earthWall {
-  background-color: rgb(15, 80, 15,.75)
+.EarthWall {
+  background-color: rgb(15, 80, 15,0.75)
+}
+
+.MoonWall{
+  background-color: rgb(220, 220, 220, 0.75);
 }
 
 @keyframes pulse {
@@ -280,4 +319,3 @@
   color: white;
   text-align: center;
 }
-
