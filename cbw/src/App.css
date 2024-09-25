@@ -157,13 +157,31 @@
   cursor: pointer;
 }
 
+.planetCell{
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+}
+
 .path {
   background-color: #1a1a1a;
+}
+
+.earthPath {
+  background-color: green
 }
 
 .wall {
   background-color: #333;
   animation: pulse 2s infinite;
+}
+
+.earthWall {
+  background-color: rgb(15, 80, 15,.75)
 }
 
 @keyframes pulse {
