@@ -38,14 +38,16 @@ function Planet({ progress, setProgress }) {
   };
 
   // Redirect to the solar system after 5 seconds if the user doesn’t click "Leave Planet"
-  useEffect(() => {
-    if (miniGameCompleted) {
-      const timer = setTimeout(() => {
-        navigate("/solarsystem");
-      }, 5000); // 5-second delay
-      return () => clearTimeout(timer); // Cleanup timer
-    }
-  }, [miniGameCompleted, navigate]);
+  // useEffect(() => {
+  //   if (miniGameCompleted) {
+  //     const timer = setTimeout(() => {
+  //       navigate("/solarsystem");
+  //     }, 5000); // 5-second delay
+  //     return () => clearTimeout(timer); // Cleanup timer
+  //   }
+  // }, [miniGameCompleted, navigate]);
+
+  
 
   return (
     <div className={conditionalBackground}>
@@ -61,6 +63,7 @@ function Planet({ progress, setProgress }) {
         />
         : 
         <div>
+          <div class ="WBox">
           <h2>Mini game completed!</h2>
           <p>Upgrade received: {name} Upgrade</p>
           <p>Next planet unlocked!</p>
@@ -70,8 +73,9 @@ function Planet({ progress, setProgress }) {
           </Link>
           <p>Redirecting to Solar System in 5 seconds...</p>
         </div>
+        </div>
       )}
-    </div>
+      </div>
   );
 }
 
