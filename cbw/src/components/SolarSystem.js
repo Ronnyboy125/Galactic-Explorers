@@ -15,6 +15,9 @@ function SolarSystem({ progress }) {
  // }else{
   return (
     <div className="SolarSystem">
+      <div classname= "Stitle">
+        The Solar System
+      </div>
       <div className="PEarth">
         {planetEarth.map((planet) => (
           <div key={planet.name} className={`planet ${planet.unlocked ? 'unlocked' : 'locked'}`}>
