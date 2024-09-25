@@ -51,7 +51,7 @@ function Planet({ progress, setProgress }) {
     <div className={conditionalBackground}>
       <h1>Welcome to {name}</h1>
       {!isCovered?(
-        <PlanetHome></PlanetHome>
+        <PlanetHome setIsCovered={setIsCovered}/>
       ) : (   
       !miniGameCompleted
         ? 

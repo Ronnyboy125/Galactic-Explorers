@@ -18,9 +18,10 @@ const border = [
 ]
 
 
-const PlanetHome = () =>{
+const PlanetHome = ({setIsCovered}) =>{
 const [borders,setBorders] = useState(border)
 const [playerPosition, setPlayerPosition] = useState([5,7]);
+const [miniGame, setMiniGame] = useState([2,13])
 
 const handleKeyDown = (e) => {
     const [x, y] = playerPosition;
@@ -42,6 +43,17 @@ const handleKeyDown = (e) => {
     }
 };
 
+const checkMiniGame = (GamePos, playerPos) => {
+    if(playerPos[0] === GamePos[0] && playerPos[1] === GamePos[1]){
+        setIsCovered(true);
+    };
+};
+
+
+useEffect(() => {
+    checkMiniGame(miniGame, playerPosition)
+},[playerPosition]);
+
 useEffect(() => {
     window.addEventListener('keydown',handleKeyDown);
     return () => window.removeEventListener('keydown',handleKeyDown);
@@ -60,6 +72,7 @@ return (
                         }`}
                         key={colIndex}
                         >
+                        {(miniGame[0]=== rowIndex && miniGame[1] === colIndex) && '🔶'}
                         </div>
                     ))}
                     </div>
