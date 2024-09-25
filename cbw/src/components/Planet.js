@@ -7,7 +7,7 @@ import "../App.css";
 function Planet({ progress, setProgress }) {
   const { name } = useParams();
   const [miniGameCompleted, setMiniGameCompleted] = useState(false);
-  const [isClicked, setIsClicked] = useState(false)
+  const [isCovered, setIsCovered] = useState(false)
   const navigate = useNavigate();
   const conditionalBackground = name;
 
@@ -50,9 +50,8 @@ function Planet({ progress, setProgress }) {
   return (
     <div className={conditionalBackground}>
       <h1>Welcome to {name}</h1>
-      {isClicked?(
+      {!isCovered?(
         <PlanetHome></PlanetHome>
-        // <div>test</div>
       ) : (   
       !miniGameCompleted
         ? 

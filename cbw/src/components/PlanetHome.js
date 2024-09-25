@@ -17,13 +17,10 @@ const border = [
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 ]
 
-const miniGames = {
-    pos1:[{name: "miniGameOne"}]
-}
+
 const PlanetHome = () =>{
 const [borders,setBorders] = useState(border)
-const [playerPosition, setPlayerPosition] = useState([5,5]);
-const [miniGameOnePos, setMiniGameOnePos] = useState([1,1]);
+const [playerPosition, setPlayerPosition] = useState([5,7]);
 
 const handleKeyDown = (e) => {
     const [x, y] = playerPosition;
@@ -46,14 +43,6 @@ const handleKeyDown = (e) => {
 };
 
 useEffect(() => {
-        const x = miniGames["pos1"].map((game)=>({
-            ...game,
-            position:[8,8]
-        }));
-        setMiniGameOnePos(x);
-  },[miniGameOnePos]);
-
-useEffect(() => {
     window.addEventListener('keydown',handleKeyDown);
     return () => window.removeEventListener('keydown',handleKeyDown);
 }, [playerPosition]);
@@ -66,12 +55,11 @@ return (
                     <div className="row" key={rowIndex}>
                     {row.map((cell, colIndex) => (
                         <div
-                        className={`cell ${cell === 1 ? 'earthWall' : 'earthPath'} ${
+                        className={`planetCell ${cell === 1 ? 'earthWall' : 'earthPath'} ${
                             playerPosition[0] === rowIndex && playerPosition[1] === colIndex ? 'player' : ''
                         }`}
                         key={colIndex}
                         >
-                        {miniGameOnePos.some((min) => min.position[0] === rowIndex && min.position[1] === colIndex) && '🔶'}
                         </div>
                     ))}
                     </div>
