@@ -23,6 +23,7 @@ const PlanetHome = ({setIsCovered}) =>{
 const [borders,setBorders] = useState(border)
 const [playerPosition, setPlayerPosition] = useState([5,7]);
 const [miniGame, setMiniGame] = useState([2,13])
+const [miniGameTwo, setMiniGameTwo] = useState([7,2])
 const { name } = useParams();
 
 const handleKeyDown = (e) => {
@@ -45,15 +46,19 @@ const handleKeyDown = (e) => {
     }
 };
 
-const checkMiniGame = (GamePos, playerPos) => {
-    if(playerPos[0] === GamePos[0] && playerPos[1] === GamePos[1]){
+const checkMiniGame = (gameOnePos, playerPos, gameTwoPos ) => {
+    if(playerPos[0] === gameOnePos[0] && playerPos[1] === gameOnePos[1]){
+        setIsCovered(true);
+    };
+
+    if(playerPos[0] === gameTwoPos[0] && playerPos[1] === gameTwoPos[1]){
         setIsCovered(true);
     };
 };
 
 
 useEffect(() => {
-    checkMiniGame(miniGame, playerPosition)
+    checkMiniGame(miniGame, playerPosition, miniGameTwo)
 },[playerPosition]);
 
 useEffect(() => {
@@ -74,7 +79,8 @@ return (
                         }`}
                         key={colIndex}
                         >
-                        {(miniGame[0]=== rowIndex && miniGame[1] === colIndex) && '🔶'}
+                        {(miniGame[0] === rowIndex && miniGame[1] === colIndex) && '🔶'}
+                        {(miniGameTwo[0] === rowIndex && miniGameTwo[1] === colIndex) && '🔶'}
                         </div>
                     ))}
                     </div>
