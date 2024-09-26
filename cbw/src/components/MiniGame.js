@@ -117,13 +117,78 @@ const MazeGame = ({ planet, onComplete }) => {
 
   return (
     <div className="game-layout">
-      <div className="fact-box">
-        <h3>Resource Facts:</h3>
-        <p>{fact ? fact : 'Collect resources to learn more about the planet.'}</p>
+      <div className="maze-grid-container">
+
+        <div className="maze-grid-container-title">
+          <h1>Exploring {planet}</h1>
+          {/* <div className="square">title</div> */}
+        </div>
+
+        <div className="maze-grid-container-resource">
+          <div className="fact-box">
+            <h3>Resource Facts:</h3>
+            <p>{fact ? fact : 'Collect resources to learn more about the planet.'}</p>
+          </div>
+          {/* <div className="square">resource</div> */}
+        </div>
+
+        <div className="maze-grid-container-inventory">
+          <div className="inventory">
+            <h3>Inventory:</h3>
+            <ul>
+              {/* {Object.entries(inventory).map((item) => (
+                <li key={item}>{item}</li>
+              ))} */}
+              <InventoryCounts inventory={inventory}/>
+            </ul>
+          </div>
+          {/* <div className="square">inventory</div> */}
+        </div>
+
+        <div className="maze-grid-container-leave">
+          {resources.length === 0 && (
+            <button type="button" className="leave-button" onClick={onComplete}>
+              Leave Planet
+            </button>
+          )}
+          {/* <div className="square">leave</div> */}
+        </div>
+
+        <div className="maze-grid-container-mazeGrid">
+          <div className="maze-grid">
+            {maze.map((row, rowIndex) => (
+              <div className="row" key={rowIndex}>
+                {row.map((cell, colIndex) => (
+                  <div
+                    className={`cell ${cell === 1 ? 'wall' : 'path'} ${
+                      playerPosition[0] === rowIndex && playerPosition[1] === colIndex ? 'player' : ''
+                    }`}
+                    key={colIndex}
+                  >
+                    {resources.some((res) => res.position[0] === rowIndex && res.position[1] === colIndex) && '🔶'}
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+          {/* <div className="square">mazeGrid</div> */}
+        </div>
+
+
+
       </div>
-      <div className="maze-container">
+
+      {/* <div className="maze-container">
         <h1>Exploring {planet}</h1>
-        <InventoryCounts inventory={inventory} facts={[]} />
+        <div className="inventory">
+          <h3>Inventory:</h3>
+          <ul>
+            {Object.entries(inventory).map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+            <InventoryCounts inventory={inventory}/>
+          </ul>
+        </div>
         <div className="maze-grid">
           {maze.map((row, rowIndex) => (
             <div className="row" key={rowIndex}>
@@ -134,9 +199,7 @@ const MazeGame = ({ planet, onComplete }) => {
                   }`}
                   key={colIndex}
                 >
-                  {resources.some(
-                    (res) => res.position[0] === rowIndex && res.position[1] === colIndex
-                  ) && '🔶'}
+                  {resources.some((res) => res.position[0] === rowIndex && res.position[1] === colIndex) && '🔶'}
                 </div>
               ))}
             </div>
@@ -147,7 +210,7 @@ const MazeGame = ({ planet, onComplete }) => {
             Leave Planet
           </button>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };
