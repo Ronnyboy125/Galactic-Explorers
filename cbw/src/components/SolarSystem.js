@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useState, useEffect, Sound } from "react";
 import { Link } from "react-router-dom";
 import "../App.css";
-//import "./sounds/Select_Sound.mp3";
+import SSmusic from "../sounds/BGM_Start.mp3";
+// import Emusic from "../sounds/BGM_Earth.mp3";
+// import Mmusuic from "../sounds/BGM_Moon.mp3";
+// import MAmusic from "../sounds/BGM_Mars.mp3";
 
 function SolarSystem({ progress, setProgress }) {
-//   let path = "./sounds/Select_Sound.mp3";
-//   let audio = new Audio(path);
+  var SSaudio = new Audio(SSmusic);
+  useEffect(() => {
+		SSaudio.play();
+  }, []);
+
+  const [isPlay, setPLay] = React.useState(true);
+
+  const togglePlay = () => {
+    setPLay(isPlay);
+  }
+
   const planetEarth = { name: "Earth", unlocked: true };
   const planetMoon = {
     name: "Moon",
