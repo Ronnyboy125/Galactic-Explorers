@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
+import selectSound from "./cbw/assests/Select_Sound.mp3"; //imported sound but don't know how to map it to the button click
+
 
 function SolarSystem({ progress }) {
   const planetEarth = [{ name: 'Earth', unlocked: true }] //  unlocked planet for testing...
@@ -13,6 +15,7 @@ function SolarSystem({ progress }) {
   // linking to a detailed page or shown as locked if not unlocked (with appropriate styling applied based on the planet's status).
  // if(planets[0].unlocked === true){
  // }else{
+
   return (
     <div className="SolarSystem">
       <div className="PEarth">
