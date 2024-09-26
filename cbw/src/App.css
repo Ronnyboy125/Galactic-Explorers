@@ -308,7 +308,9 @@
 }
 
 .player {
-  background-color: #00f;
+  background-image: url("/assets/player.png");
+  background-size: cover;
+  /* background-color: #00f; */
   transition: all 0.3s ease;
 }
 
