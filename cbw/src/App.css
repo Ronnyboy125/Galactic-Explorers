@@ -352,3 +352,24 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+.planetCell .collectable {
+  font-size: 24px;
+}
+
+/* Message box */
+.message-box {
+  position: fixed;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0,0,0,0.7);
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+/* Inventory */
+.inventory {
+  margin-top: 20px;
+}
