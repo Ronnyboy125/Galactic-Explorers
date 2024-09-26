@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import Popup from 'reactjs-popup';
 import '../App.css';
 import InventoryCounts from '../services/inventoryCount';
+import 'reactjs-popup/dist/index.css';
 
-// prototype of the maze mini game, need art assets, needs the inventory to be stacked (ie iron ore x 3)
 // better styling, and styling specific to the planet
 // Better information in the popups
-// make it more engaging someone
 
 const MAZE_SIZE = 10;
 
@@ -42,13 +42,16 @@ const initialMaze = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
-
 const MazeGame = ({ planet, onComplete }) => {
   const [maze] = useState(initialMaze);
   const [playerPosition, setPlayerPosition] = useState([0, 0]);
   const [fact, setFact] = useState(null);
   const [inventory, setInventory] = useState([]);
   const [resources, setResources] = useState([]);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [timer, setTimer] = useState(60); 
+  const [collectedCount, setCollectedCount] = useState(0); 
+  const [gameOver, setGameOver] = useState(false);
 
   useEffect(() => {
     if (planetResources[planet]) {
@@ -59,6 +62,19 @@ const MazeGame = ({ planet, onComplete }) => {
       setResources(initialResources);
     }
   }, [planet, maze]);
+
+  useEffect(() => {
+    const countdown = setInterval(() => {
+      if (timer > 0) {
+        setTimer(timer - 1);
+      } else {
+        setGameOver(true);
+        clearInterval(countdown);
+      }
+    }, 1000);
+
+    return () => clearInterval(countdown);
+  }, [timer]);
 
   const getRandomPosition = (maze) => {
     let x;
@@ -97,6 +113,9 @@ const MazeGame = ({ planet, onComplete }) => {
     if (collectedResource) {
       setInventory([...inventory, collectedResource.type]);
       setFact(collectedResource.fact);
+      setCollectedCount(collectedCount + 1); 
+      setIsPopupOpen(true); 
+
       const updatedResources = resources.filter((res) => res !== collectedResource);
       setResources(updatedResources);
 
@@ -118,31 +137,25 @@ const MazeGame = ({ planet, onComplete }) => {
   return (
     <div className="game-layout">
       <div className="maze-grid-container">
-
         <div className="maze-grid-container-title">
           <h1>Exploring {planet}</h1>
-          {/* <div className="square">title</div> */}
+          <h3>Timer: {timer} seconds</h3> 
         </div>
 
-        <div className="maze-grid-container-resource">
+     {/*   <div className="maze-grid-container-resource">
           <div className="fact-box">
             <h3>Resource Facts:</h3>
             <p>{fact ? fact : 'Collect resources to learn more about the planet.'}</p>
           </div>
-          {/* <div className="square">resource</div> */}
         </div>
-
+*/}
         <div className="maze-grid-container-inventory">
           <div className="inventory">
             <h3>Inventory:</h3>
             <ul>
-              {/* {Object.entries(inventory).map((item) => (
-                <li key={item}>{item}</li>
-              ))} */}
               <InventoryCounts inventory={inventory}/>
             </ul>
           </div>
-          {/* <div className="square">inventory</div> */}
         </div>
 
         <div className="maze-grid-container-leave">
@@ -151,7 +164,6 @@ const MazeGame = ({ planet, onComplete }) => {
               Leave Planet
             </button>
           )}
-          {/* <div className="square">leave</div> */}
         </div>
 
         <div className="maze-grid-container-mazeGrid">
@@ -171,48 +183,29 @@ const MazeGame = ({ planet, onComplete }) => {
               </div>
             ))}
           </div>
-          {/* <div className="square">mazeGrid</div> */}
         </div>
-
-
-
       </div>
 
-      {/* <div className="maze-container">
-        <h1>Exploring {planet}</h1>
-        <div className="inventory">
-          <h3>Inventory:</h3>
-          <ul>
-            {Object.entries(inventory).map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-            <InventoryCounts inventory={inventory}/>
-          </ul>
+      <Popup open={isPopupOpen} closeOnDocumentClick onClose={() => setIsPopupOpen(false)}>
+        <div className="popup-box" style={{ backgroundColor: 'black', color: 'white', padding: '20px', borderRadius: '10px' }}>
+          <h3>Resource Collected!</h3>
+          <p>{fact}</p>
+          <button onClick={() => setIsPopupOpen(false)} style={{ backgroundColor: 'white', color: 'black' }}>Continue</button>
         </div>
-        <div className="maze-grid">
-          {maze.map((row, rowIndex) => (
-            <div className="row" key={rowIndex}>
-              {row.map((cell, colIndex) => (
-                <div
-                  className={`cell ${cell === 1 ? 'wall' : 'path'} ${
-                    playerPosition[0] === rowIndex && playerPosition[1] === colIndex ? 'player' : ''
-                  }`}
-                  key={colIndex}
-                >
-                  {resources.some((res) => res.position[0] === rowIndex && res.position[1] === colIndex) && '🔶'}
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
-        {resources.length === 0 && (
-          <button type="button" className="leave-button" onClick={onComplete}>
-            Leave Planet
-          </button>
-        )}
-      </div> */}
+      </Popup>
+
+      {gameOver && (
+        <Popup open={gameOver} closeOnDocumentClick>
+          <div className="popup-box" style={{ backgroundColor: 'red', color: 'white', padding: '20px', borderRadius: '10px' }}>
+            <h2>Game Over!</h2>
+            <p>Time's up! You collected {collectedCount} resources.</p>
+            <button onClick={() => window.location.reload()} style={{ backgroundColor: 'white', color: 'red' }}>Retry</button>
+          </div>
+        </Popup>
+      )}
     </div>
   );
 };
 
 export default MazeGame;
+
