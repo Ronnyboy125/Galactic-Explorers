@@ -151,7 +151,7 @@ const MazeGame = ({ planet, onComplete }) => {
 */}
         <div className="maze-grid-container-inventory">
           <div className="inventory">
-            <h3>Inventory:</h3>
+            {/* <h3>Inventory:</h3> */}
             <ul>
               <InventoryCounts inventory={inventory}/>
             </ul>
