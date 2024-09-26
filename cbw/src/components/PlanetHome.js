@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import '../App.css';
+import { useParams } from 'react-router-dom';
 
 const GROUND_SIZE= 16;
 
@@ -17,13 +18,13 @@ const border = [
     [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
 ]
 
-const miniGames = {
-    pos1:[{name: "miniGameOne"}]
-}
-const PlanetHome = () =>{
+
+const PlanetHome = ({setIsCovered}) =>{
 const [borders,setBorders] = useState(border)
-const [playerPosition, setPlayerPosition] = useState([5,5]);
-const [miniGameOnePos, setMiniGameOnePos] = useState([1,1]);
+const [playerPosition, setPlayerPosition] = useState([5,7]);
+const [miniGame, setMiniGame] = useState([2,13])
+const [miniGameTwo, setMiniGameTwo] = useState([7,2])
+const { name } = useParams();
 
 const handleKeyDown = (e) => {
     const [x, y] = playerPosition;
@@ -45,13 +46,20 @@ const handleKeyDown = (e) => {
     }
 };
 
+const checkMiniGame = (gameOnePos, playerPos, gameTwoPos ) => {
+    if(playerPos[0] === gameOnePos[0] && playerPos[1] === gameOnePos[1]){
+        setIsCovered(true);
+    };
+
+    if(playerPos[0] === gameTwoPos[0] && playerPos[1] === gameTwoPos[1]){
+        setIsCovered(true);
+    };
+};
+
+
 useEffect(() => {
-        const x = miniGames["pos1"].map((game)=>({
-            ...game,
-            position:[8,8]
-        }));
-        setMiniGameOnePos(x);
-  },[miniGameOnePos]);
+    checkMiniGame(miniGame, playerPosition, miniGameTwo)
+},[playerPosition]);
 
 useEffect(() => {
     window.addEventListener('keydown',handleKeyDown);
@@ -60,18 +68,19 @@ useEffect(() => {
 
 return (
     <div className='game-Layout'>
-        <div className='maze-container'>
+        <div className= {name+'-container'}>
             <div className="maze-grid">
                 {borders.map((row, rowIndex) => (
                     <div className="row" key={rowIndex}>
                     {row.map((cell, colIndex) => (
                         <div
-                        className={`cell ${cell === 1 ? 'earthWall' : 'earthPath'} ${
+                        className={`planetCell ${cell === 1 ? name+'Wall' : 'planetPath'} ${
                             playerPosition[0] === rowIndex && playerPosition[1] === colIndex ? 'player' : ''
                         }`}
                         key={colIndex}
                         >
-                        {miniGameOnePos.some((min) => min.position[0] === rowIndex && min.position[1] === colIndex) && '🔶'}
+                        {(miniGame[0] === rowIndex && miniGame[1] === colIndex) && '🔶'}
+                        {(miniGameTwo[0] === rowIndex && miniGameTwo[1] === colIndex) && '🔶'}
                         </div>
                     ))}
                     </div>

@@ -1,5 +1,3 @@
-
-
 .home {
   display: flex;
   flex-direction: column;
@@ -142,6 +140,36 @@
   font-family: 'Space Mono', monospace; /* Space-themed font */
 }
 
+.Earth-container {
+  display: flex;
+  flex-direction: column;
+  background-image: url('/assets/earth-landing.png');
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  font-family: 'Space Mono', monospace; /* Space-themed font */
+}
+
+.Moon-container {
+  display: flex;
+  flex-direction: column;
+  background-image: url('/assets/moon-landing.png');
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  font-family: 'Space Mono', monospace; /* Space-themed font */
+}
+
+.Mars-container {
+  display: flex;
+  flex-direction: column;
+  background-image: url('/assets/mars-landing.png');
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  font-family: 'Space Mono', monospace; /* Space-themed font */
+}
+
 .row {
   display: flex;
 }
@@ -157,12 +185,27 @@
   cursor: pointer;
 }
 
+.planetCell{
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+}
+
 .path {
   background-color: #1a1a1a;
 }
 
-.earthPath {
+.EarthPath {
   background-color: green
+}
+
+.MoonPath{
+  /* background-color: lightblue; */
+  
 }
 
 .wall {
@@ -170,8 +213,12 @@
   animation: pulse 2s infinite;
 }
 
-.earthWall {
-  background-color: rgb(15, 80, 15)
+.EarthWall {
+  background-color: rgb(15, 80, 15,0.75)
+}
+
+.MoonWall{
+  background-color: rgb(220, 220, 220, 0.75);
 }
 
 @keyframes pulse {
@@ -226,13 +273,13 @@
 .SolarSystem {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   height: 100vh;
   background-image: url('/assets/solar-system-background.jpg');
   background-size: cover;
   color: white;
   text-align: center;
+  font-weight: bold;
+  font-size: 60px;
 }
 
 .Earth {
@@ -240,9 +287,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 150vh;
+  height: 100vh;
   background-image: url('/assets/earth-background.png');
-  background-size: cover;
+  background-size: 100% 100%;
   color: white;
   text-align: center;
 }
@@ -271,3 +318,12 @@
   text-align: center;
 }
 
+.WBox {
+  width: 400;
+  height: 500;
+  border: 3px solid black;
+  background-color:beige;
+  color: black;
+  padding: 10px;
+  margin: 10px;
+}
