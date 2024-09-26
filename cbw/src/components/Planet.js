@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import MiniGame from "./TriviaGame"; 
-import MazeGame from "./MiniGame"; 
+import MiniGame from "./TriviaGame";
+import MazeGame from "./MiniGame";
 import PlanetHome from "./PlanetHome";
+import InventoryCounts from "../services/inventoryCount"; // Import InventoryCounts
+import "../App.css";
 
 function Planet({ progress, setProgress }) {
   const { name } = useParams();
-  const [gameMode, setGameMode] = useState('home'); // 'home', 'trivia', etc.
+  const [gameMode, setGameMode] = useState('home');
   const [triviaCompleted, setTriviaCompleted] = useState(
     progress.triviaCompletedPlanets.includes(name)
   );
@@ -15,6 +17,7 @@ function Planet({ progress, setProgress }) {
   );
   const navigate = useNavigate();
   const conditionalBackground = name;
+
 
   // is the planet is unlocked?
   const isPlanetUnlocked = progress.unlockedPlanets.includes(name);
@@ -26,7 +29,7 @@ function Planet({ progress, setProgress }) {
       triviaCompletedPlanets: [...(progress.triviaCompletedPlanets || []), name],
       learnedFacts: {
         ...progress.learnedFacts,
-        [name]: learnedFacts,
+        [name]: [...(progress.learnedFacts[name] || []), ...learnedFacts],
       },
     };
     setProgress(newProgress);
@@ -60,18 +63,34 @@ function Planet({ progress, setProgress }) {
     setGameMode('home'); // Return to PlanetHome after maze
   };
 
+  // Handle collected facts from PlanetHome
+  const updateCollectedFacts = (planetName, fact) => {
+    const currentFacts = progress.learnedFacts[planetName] || [];
+    if (!currentFacts.includes(fact)) {
+      const newProgress = {
+        ...progress,
+        learnedFacts: {
+          ...progress.learnedFacts,
+          [planetName]: [...currentFacts, fact],
+        },
+      };
+      setProgress(newProgress);
+    }
+  };
+
   // Redirect to the solar system after maze game completion on non-Earth planets
   useEffect(() => {
     if (mazeGameCompleted && triviaCompleted && name !== 'Earth') {
       const timer = setTimeout(() => {
         navigate("/solarsystem");
       }, 5000); // 5-second delay
-      return () => clearTimeout(timer); // Cleanup timer
+      return () => clearTimeout(timer);  // Cleanup timer
     }
   }, [mazeGameCompleted, triviaCompleted, name, navigate]);
 
   if (name === 'Earth') {
     // if the signal has been sent i.e has the player completed the game show the summary
+
     if (progress.signalSent) {
       return (
         <div className={conditionalBackground}>
@@ -93,17 +112,27 @@ function Planet({ progress, setProgress }) {
     }
 
     // earth woll only have maze portal
+
     switch (gameMode) {
       case 'home':
         return (
           <div className={conditionalBackground}>
             <h1>Welcome to Earth</h1>
-            <PlanetHome setGameMode={setGameMode} planet={name} isEarth={true} />
+            <PlanetHome
+              setGameMode={setGameMode}
+              planet={name}
+              isEarth={true}
+              updateCollectedFacts={updateCollectedFacts}
+            />
+            <InventoryCounts
+              inventory={[]}
+              facts={progress.learnedFacts[name] || []}
+            />
           </div>
         );
       case 'maze':
         if (mazeGameCompleted) {
-          // is the maze already completed?
+           // is the maze already completed?
           return (
             <div className={conditionalBackground}>
               <h1>Earth - Resources Collected</h1>
@@ -115,6 +144,7 @@ function Planet({ progress, setProgress }) {
           );
         } else {
           // if not start maze game
+
           return (
             <div className={conditionalBackground}>
               <MazeGame planet={name} onComplete={handleMazeComplete} />
@@ -129,6 +159,7 @@ function Planet({ progress, setProgress }) {
   // all other planets
   if (!isPlanetUnlocked) {
     // planet lock check
+
     return (
       <div className={conditionalBackground}>
         <h1>{name} (Locked)</h1>
@@ -140,17 +171,27 @@ function Planet({ progress, setProgress }) {
     );
   } else {
     // planet is unlocked
+
     switch (gameMode) {
       case 'home':
         return (
           <div className={conditionalBackground}>
             <h1>Welcome to {name}</h1>
-            <PlanetHome setGameMode={setGameMode} planet={name} />
+            <PlanetHome
+              setGameMode={setGameMode}
+              planet={name}
+              updateCollectedFacts={updateCollectedFacts}
+            />
+            <InventoryCounts
+              inventory={[]}
+              facts={progress.learnedFacts[name] || []}
+            />
           </div>
         );
       case 'trivia':
         if (triviaCompleted) {
           // is the trivia already completed
+
           return (
             <div className={conditionalBackground}>
               <h1>{name} - Trivia Completed</h1>
@@ -160,6 +201,7 @@ function Planet({ progress, setProgress }) {
           );
         } else {
           // start trivia game
+
           return (
             <div className={conditionalBackground}>
               <MiniGame planetName={name} onComplete={handleTriviaComplete} />
@@ -169,6 +211,7 @@ function Planet({ progress, setProgress }) {
       case 'maze':
         if (!triviaCompleted) {
           // cannot start maze until the trivia "mini game" is completed
+
           return (
             <div className={conditionalBackground}>
               <h1>{name} - Trivia Not Completed</h1>
@@ -178,6 +221,7 @@ function Planet({ progress, setProgress }) {
           );
         } else if (mazeGameCompleted) {
           // is  the maze already completed?
+
           return (
             <div className={conditionalBackground}>
               <h1>{name} - Resources Collected</h1>
@@ -187,6 +231,7 @@ function Planet({ progress, setProgress }) {
           );
         } else {
           // else start maze game
+
           return (
             <div className={conditionalBackground}>
               <MazeGame planet={name} onComplete={handleMazeComplete} />

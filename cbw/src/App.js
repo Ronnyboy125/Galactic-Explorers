@@ -1,3 +1,5 @@
+// App.js
+
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
@@ -9,15 +11,15 @@ import { loadProgress, saveProgress } from './services/api';
 function App() {
   const [progress, setProgress] = useState({
     username: 'player1',
-    unlockedPlanets: ['Earth'], // only Earth should be unlocked initially
+    unlockedPlanets: ['Earth'],
     upgrades: [],
     triviaCompletedPlanets: [],
     mazeGameCompletedPlanets: [],
-    learnedFacts: {},
+    learnedFacts: {}, // Initialize as an empty object
     signalSent: false,
   });
 
-  // load saved progress when the app starts
+  // Load saved progress when the app starts
   useEffect(() => {
     async function fetchProgress() {
       const savedProgress = await loadProgress('player1');
@@ -28,7 +30,7 @@ function App() {
     fetchProgress();
   }, []);
 
-  // save progress every time it changes
+  // Save progress every time it changes
   useEffect(() => {
     if (progress) {
       saveProgress(progress.username, progress);

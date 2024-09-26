@@ -44,7 +44,7 @@ function TriviaGame({ planetName, onComplete }) {
       // all answers correct
       onComplete(learnedFacts);
     } else {
-      // not all answers are correct... retry
+      // not all answers are correct
       handleRetry();
     }
   };
@@ -54,7 +54,9 @@ function TriviaGame({ planetName, onComplete }) {
       {!showResult ? (
         <div>
           <h2>Trivia about {planetName}</h2>
-          <p>Question {currentQuestionIndex + 1} of {questions.length}</p>
+          <p>
+            Question {currentQuestionIndex + 1} of {questions.length}
+          </p>
           <p>{currentQuestion.question}</p>
           <form>
             {currentQuestion.options.map((option) => (
@@ -71,18 +73,16 @@ function TriviaGame({ planetName, onComplete }) {
               </div>
             ))}
           </form>
-          <button
-            type="button"
-            onClick={handleNextQuestion}
-            disabled={!selectedOption}
-          >
+          <button type="button" onClick={handleNextQuestion} disabled={!selectedOption}>
             Next
           </button>
         </div>
       ) : (
         <div>
           <h2>Quiz Completed!</h2>
-          <p>Your score: {score} out of {questions.length}</p>
+          <p>
+            Your score: {score} out of {questions.length}
+          </p>
           {score === questions.length ? (
             <div>
               <p>Congratulations! You've completed the trivia for {planetName}!</p>

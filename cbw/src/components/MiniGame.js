@@ -9,8 +9,6 @@ import InventoryCounts from '../services/inventoryCount';
 
 const MAZE_SIZE = 10;
 
-
-
 // Define resources for each planet
 const planetResources = {
   Earth: [
@@ -125,12 +123,7 @@ const MazeGame = ({ planet, onComplete }) => {
       </div>
       <div className="maze-container">
         <h1>Exploring {planet}</h1>
-        <div className="inventory">
-          <h3>Inventory:</h3>
-          <ul>
-            <InventoryCounts inventory={inventory} />
-          </ul>
-        </div>
+        <InventoryCounts inventory={inventory} facts={[]} />
         <div className="maze-grid">
           {maze.map((row, rowIndex) => (
             <div className="row" key={rowIndex}>
