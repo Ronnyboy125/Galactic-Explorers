@@ -199,15 +199,6 @@
   background-color: #1a1a1a;
 }
 
-.EarthPath {
-  background-color: green
-}
-
-.MoonPath{
-  /* background-color: lightblue; */
-  
-}
-
 .wall {
   background-color: #333;
   animation: pulse 2s infinite;
@@ -219,6 +210,10 @@
 
 .MoonWall{
   background-color: rgb(220, 220, 220, 0.75);
+}
+
+.MarsWall {
+  background-color: rgb(224, 103, 5, 0.75);
 }
 
 @keyframes pulse {
