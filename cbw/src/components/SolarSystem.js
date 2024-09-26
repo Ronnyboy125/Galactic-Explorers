@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../App.css";
-import selectSound from "./cbw/assests/Select_Sound.mp3"; //imported sound but don't know how to map it to the button click
+import "./sounds/Select_Sound.mp3"; //imported sound but don't know how to map it to the button click
 
 function SolarSystem({ progress, setProgress }) {
   const planetEarth = { name: "Earth", unlocked: true };
