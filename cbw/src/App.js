@@ -9,8 +9,12 @@ import { loadProgress, saveProgress } from './services/api';
 function App() {
   const [progress, setProgress] = useState({
     username: 'player1',
-    unlockedPlanets: ['Mercury'],
+    unlockedPlanets: ['Earth'], // only Earth should be unlocked initially
     upgrades: [],
+    triviaCompletedPlanets: [],
+    mazeGameCompletedPlanets: [],
+    learnedFacts: {},
+    signalSent: false,
   });
 
   // load saved progress when the app starts
@@ -35,8 +39,14 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/solarsystem" element={<SolarSystem progress={progress} />} />
-        <Route path="/planet/:name" element={<Planet progress={progress} setProgress={setProgress} />} />
+        <Route
+          path="/solarsystem"
+          element={<SolarSystem progress={progress} setProgress={setProgress} />}
+        />
+        <Route
+          path="/planet/:name"
+          element={<Planet progress={progress} setProgress={setProgress} />}
+        />
       </Routes>
     </Router>
   );

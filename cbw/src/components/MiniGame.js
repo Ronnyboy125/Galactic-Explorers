@@ -9,6 +9,28 @@ import InventoryCounts from '../services/inventoryCount';
 
 const MAZE_SIZE = 10;
 
+
+
+// Define resources for each planet
+const planetResources = {
+  Earth: [
+    { type: 'Iron Ore', fact: 'Iron is used to build spaceships.' },
+    { type: 'Copper Ore', fact: 'Copper is a good conductor of electricity.' },
+  ],
+  Moon: [
+    { type: 'Moon Rock', fact: 'Moon rocks are made of basalt.' },
+    { type: 'Regolith', fact: 'Regolith is lunar soil.' },
+  ],
+  Mars: [
+    { type: 'Mars Soil', fact: 'Martian soil contains iron oxide.' },
+    { type: 'Ice', fact: 'Water ice exists on Mars.' },
+  ],
+  Venus: [
+    { type: 'Sulfuric Acid', fact: 'Venus has clouds of sulfuric acid.' },
+    { type: 'Rock Samples', fact: 'Venusian rocks are volcanic.' },
+  ],
+};
+
 const initialMaze = [
   [0, 1, 0, 0, 0, 0, 0, 1, 0, 0],
   [0, 1, 0, 1, 1, 1, 0, 1, 0, 1],
@@ -22,35 +44,12 @@ const initialMaze = [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 ];
 
-const planetResources = {
-  earth: [
-    { type: 'Earth Material', fact: 'Materials for spaceship' },//need research
-    { type: 'Earth Material 2', fact: 'Materials for spaceship.' },//need research
-  ],
-  moon: [
-    { type: 'Moon Material', fact: 'Moon materials.' },//need research
-    { type: 'Moon Material 2', fact: 'Moon materials.' },//need research
-  ],
-};
 
-const getRandomPosition = (maze) => {
-  let x;
-  let y;
-  do {
-    x = Math.floor(Math.random() * MAZE_SIZE);
-    y = Math.floor(Math.random() * MAZE_SIZE);
-  } while (maze[x][y] !== 0); // is it's on a traversable tile?
-  return [x, y];
-};
-
-const MazeGame = ({ planet = 'earth', onComplete }) => {
-  const [maze, setMaze] = useState(initialMaze);
+const MazeGame = ({ planet, onComplete }) => {
+  const [maze] = useState(initialMaze);
   const [playerPosition, setPlayerPosition] = useState([0, 0]);
   const [fact, setFact] = useState(null);
-  const [inventory, setInventory] = useState(() => {
-    const savedInventory = localStorage.getItem(`inventory-${planet}`);
-    return savedInventory ? JSON.parse(savedInventory) : [];
-  });
+  const [inventory, setInventory] = useState([]);
   const [resources, setResources] = useState([]);
 
   useEffect(() => {
@@ -61,11 +60,17 @@ const MazeGame = ({ planet = 'earth', onComplete }) => {
       }));
       setResources(initialResources);
     }
-  }, [planet]);
+  }, [planet, maze]);
 
-  useEffect(() => {
-    localStorage.setItem(`inventory-${planet}`, JSON.stringify(inventory));
-  }, [inventory, planet]);
+  const getRandomPosition = (maze) => {
+    let x;
+    let y;
+    do {
+      x = Math.floor(Math.random() * MAZE_SIZE);
+      y = Math.floor(Math.random() * MAZE_SIZE);
+    } while (maze[x][y] !== 0);
+    return [x, y];
+  };
 
   const handleKeyDown = (e) => {
     const [x, y] = playerPosition;
@@ -88,7 +93,9 @@ const MazeGame = ({ planet = 'earth', onComplete }) => {
   };
 
   const checkCollection = (x, y) => {
-    const collectedResource = resources.find((res) => res.position[0] === x && res.position[1] === y);
+    const collectedResource = resources.find(
+      (res) => res.position[0] === x && res.position[1] === y
+    );
     if (collectedResource) {
       setInventory([...inventory, collectedResource.type]);
       setFact(collectedResource.fact);
@@ -96,7 +103,7 @@ const MazeGame = ({ planet = 'earth', onComplete }) => {
       setResources(updatedResources);
 
       if (updatedResources.length === 0) {
-        setFact(prevFact => `${prevFact} All resources collected! You can now leave ${planet}.`);
+        setFact((prevFact) => `${prevFact} All resources collected! You can now leave ${planet}.`);
       }
     }
   };
@@ -121,10 +128,7 @@ const MazeGame = ({ planet = 'earth', onComplete }) => {
         <div className="inventory">
           <h3>Inventory:</h3>
           <ul>
-            {/* {Object.entries(inventory).map((item) => (
-              <li key={item}>{item}</li>
-            ))} */}
-            <InventoryCounts inventory={inventory}/>
+            <InventoryCounts inventory={inventory} />
           </ul>
         </div>
         <div className="maze-grid">
@@ -137,7 +141,9 @@ const MazeGame = ({ planet = 'earth', onComplete }) => {
                   }`}
                   key={colIndex}
                 >
-                  {resources.some((res) => res.position[0] === rowIndex && res.position[1] === colIndex) && '🔶'}
+                  {resources.some(
+                    (res) => res.position[0] === rowIndex && res.position[1] === colIndex
+                  ) && '🔶'}
                 </div>
               ))}
             </div>
