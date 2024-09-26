@@ -12,7 +12,7 @@ const InventoryCounts = ({ inventory = [], facts = [] }) => {
       {/* inventory items */}
       {inventory.length > 0 && (
         <div className="inventory-items">
-          <h3>Inventory:</h3>
+          {/* <h3>Inventory:</h3> */}
           <ul>
             {Object.entries(countMap).map(([item, count]) => (  //AI was used for this line Object.entries()
               <li key={item}>

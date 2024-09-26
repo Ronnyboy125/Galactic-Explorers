@@ -133,18 +133,20 @@
 
 /*  */
 
+/* Used for visualizing formatting layout in testing */
 .square {
   height: 100px;
   width: 100px;
   background-color: #555;
 }
 
+/* src: https://css-tricks.com/snippets/css/complete-guide-grid/#prop-justify-items */
 .maze-grid-container {
   display: grid;
   height: 100vh;
   width: 100vw;
-  grid-template-columns: 100px 1fr 1fr 100px;
-  grid-template-rows: 20px 1fr 2fr 2fr 1fr 20px;
+  grid-template-columns: 200px 1fr 1fr 200px;
+  grid-template-rows: 20px 1fr 2fr 1fr 2fr 20px;
   grid-column-gap: 10px;
   grid-row-gap: 10px;
   place-items: center;
@@ -156,22 +158,21 @@
   /* place-self: center; */
 }
 
-.maze-grid-container-resource {
+/* .maze-grid-container-resource {
   grid-column: 3 / 4;
   grid-row: 3 / 4;
-  /* place-self: center; */
-}
+} */
 
 .maze-grid-container-inventory {
   grid-column: 3 / 4;
-  grid-row: 4 / 5;
+  grid-row: 3 / 4;
   color: white;
   /* justify-self: start; */
 }
 
 .maze-grid-container-leave {
   grid-column: 3 / 4;
-  grid-row: 5 / 6;
+  grid-row: 4 / 5;
   /* place-self: center; */
 }
 
@@ -182,10 +183,13 @@
 }
 
 .inventory {
-  margin-top: 20px;
-  padding: 10px;
+  padding: 10px 50px;
+  height: 150px;
+  width: 180px;
   background-color: #222;
   color: #fff;
+  text-align: left;
+  /* justify-items: end; */
   /* align-self: start; */
   border-radius: 5px;
   animation: fadeIn 1s ease-in-out;
@@ -206,6 +210,7 @@
   background-image: url('/assets/earth-landing.png');
   align-items: center;
   justify-content: center;
+  background-size: 100% 100%;
   margin-top: 20px;
   font-family: 'Space Mono', monospace; /* Space-themed font */
 }
@@ -216,6 +221,7 @@
   background-image: url('/assets/moon-landing.png');
   align-items: center;
   justify-content: center;
+  background-size: 100% 100%;
   margin-top: 20px;
   font-family: 'Space Mono', monospace; /* Space-themed font */
 }
@@ -226,6 +232,7 @@
   background-image: url('/assets/mars-landing.png');
   align-items: center;
   justify-content: center;
+  background-size: 100% 100%;
   margin-top: 20px;
   font-family: 'Space Mono', monospace; /* Space-themed font */
 }
@@ -261,7 +268,7 @@
 
 .wall {
   background-color: #333;
-  animation: pulse 2s infinite;
+  animation: mazePulse 2s infinite;
 }
 
 .EarthWall {
@@ -276,7 +283,7 @@
   background-color: rgb(224, 103, 5, 0.75);
 }
 
-@keyframes pulse {
+@keyframes mazePulse {
   0% {
     background-color: #333;
   }
@@ -285,6 +292,18 @@
   }
   100% {
     background-color: #333;
+  }
+}
+
+@keyframes buttonPulse {
+  0% {
+    background-color: #002fff;
+  }
+  50% {
+    background-color: #00b7ff;
+  }
+  100% {
+    background-color: #002fff;
   }
 }
 
@@ -312,17 +331,20 @@
 }
 
 .leave-button {
-  background-color: #28a745;
+  background-color: rgb(89, 0, 255);
   color: white;
   border: none;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
   margin-top: 20px;
+  border-radius: 5px;
+  /* animation: fadeIn 1s ease-in-out; */
+  /* animation: buttonPulse 1s infinite; */
 }
 
 .leave-button:hover {
-  background-color: #218838;
+  background-color: rgb(0, 89, 255);
 }
 
 .SolarSystem {
@@ -344,7 +366,7 @@
   justify-content: center;
   height: 100vh;
   background-image: url('/assets/earth-background.png');
-  background-size: cover;
+  background-size: 100% 100%;
   color: white;
   text-align: center;
 }
@@ -354,9 +376,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 150vh;
+  height: 100vh;
   background-image: url('/assets/moon-background.png');
-  background-size: cover;
+  background-size: 100% 100%;
   color: white;
   text-align: center;
 }
@@ -366,9 +388,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 150vh;
+  height: 100vh;
   background-image: url('/assets/mars-background.png');
-  background-size: cover;
+  background-size: 100% 100%;
   color: white;
   text-align: center;
 }
