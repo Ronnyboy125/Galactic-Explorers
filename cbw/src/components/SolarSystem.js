@@ -64,7 +64,7 @@ function SolarSystem({ progress, setProgress }) {
           {planetMoon.unlocked ? (
             <Link to={`/planet/${planetMoon.name}`}>{planetMoon.name}</Link>
           ) : (
-            <span>{planetMoon.name} (Locked)</span>
+            <span>{planetMoon.name}</span>
           )}
         </div>
       </div>
@@ -76,7 +76,7 @@ function SolarSystem({ progress, setProgress }) {
           {planetMars.unlocked ? (
             <Link to={`/planet/${planetMars.name}`}>{planetMars.name}</Link>
           ) : (
-            <span>{planetMars.name} (Locked)</span>
+            <span>{planetMars.name}</span>
           )}
         </div>
       </div>
@@ -88,7 +88,7 @@ function SolarSystem({ progress, setProgress }) {
           {planetVenus.unlocked ? (
             <Link to={`/planet/${planetVenus.name}`}>{planetVenus.name}</Link>
           ) : (
-            <span>{planetVenus.name} (Locked)</span>
+            <span>{planetVenus.name}</span>
           )}
         </div>
       </div>
