@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Sound } from "react";
+import React, {useEffect} from "react";
 import { Link } from "react-router-dom";
 import "../App.css";
 import SSmusic from "../sounds/BGM_Start.mp3";
@@ -10,13 +10,7 @@ function SolarSystem({ progress, setProgress }) {
   var SSaudio = new Audio(SSmusic);
   useEffect(() => {
 		SSaudio.play();
-  }, []);
-
-  const [isPlay, setPLay] = React.useState(true);
-
-  const togglePlay = () => {
-    setPLay(isPlay);
-  }
+  });
 
   const planetEarth = { name: "Earth", unlocked: true };
   const planetMoon = {
@@ -64,7 +58,7 @@ function SolarSystem({ progress, setProgress }) {
           {planetMoon.unlocked ? (
             <Link to={`/planet/${planetMoon.name}`}>{planetMoon.name}</Link>
           ) : (
-            <span>{planetMoon.name} (Locked)</span>
+            <span>{planetMoon.name}</span>
           )}
         </div>
       </div>
@@ -76,7 +70,7 @@ function SolarSystem({ progress, setProgress }) {
           {planetMars.unlocked ? (
             <Link to={`/planet/${planetMars.name}`}>{planetMars.name}</Link>
           ) : (
-            <span>{planetMars.name} (Locked)</span>
+            <span>{planetMars.name}</span>
           )}
         </div>
       </div>
@@ -88,7 +82,7 @@ function SolarSystem({ progress, setProgress }) {
           {planetVenus.unlocked ? (
             <Link to={`/planet/${planetVenus.name}`}>{planetVenus.name}</Link>
           ) : (
-            <span>{planetVenus.name} (Locked)</span>
+            <span>{planetVenus.name}</span>
           )}
         </div>
       </div>
