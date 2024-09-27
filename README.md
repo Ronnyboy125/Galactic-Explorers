@@ -1,5 +1,8 @@
 # Welcome to Whitworth University Computer Science Community Building Week!
 
+### Pitch Video Link:
+* https://youtu.be/bsAfeEaUmEo
+
 This fall, we're kicking off the semester with an exciting challenge that brings together every computer science student for the first time in a competition that’s part game jam, part community-building exercise. This event is more than just a contest—it's an opportunity to learn, collaborate, and showcase the collective creativity of the student body.
 
 Over the week, each team will design, develop, and present a game that pushes the boundaries of what we can achieve in a short timeframe. Whether you’re diving into new technologies, exploring innovative game mechanics, or simply enjoying the process of coding with peers, this competition is all about embracing the spirit of learning and having fun.
