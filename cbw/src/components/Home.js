@@ -5,7 +5,7 @@ import "../App.css";
 function Home() {
 	return (
 		<div className="home">
-			<h1 className="game-title">Space Exploration Game</h1>
+			<h1 className="game-title">Galactic Explorers</h1>
 			<div className="home-buttons">
 				{/* start a new game */}
 				<Link to="/solarsystem" className="start-button">
@@ -18,7 +18,7 @@ function Home() {
 			</div>
 			<div className="instructions">
 				<p>
-					Welcome to the Space Exploration Game! Click "Start Game" to begin
+					Welcome to Galactic Explorers! Click "Start Game" to begin
 					exploring the solar system. As you visit each planet, you'll play
 					mini-games to unlock new planets and gather resources.
 				</p>
